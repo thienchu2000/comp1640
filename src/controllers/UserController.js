@@ -109,6 +109,14 @@ class UserController {
       res.send("updated thanh cong");
     });
   }
+  delete(req, res, next) {
+    const { customerNumber } = req.body;
+    const query = `DELETE FROM customers WHERE customerNumber = ${customerNumber};`;
+    db.query(query, (err, results) => {
+      if (err) return res.send(err);
+      res.send("deleted done");
+    });
+  }
 }
 
 module.exports = new UserController();

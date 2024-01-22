@@ -12,13 +12,8 @@ app.use(bodyParser.json());
 
 route(app);
 
-app.listen(3000, () => {
-  db.connect((err) => {
-    if (err) {
-      console.log("Error connecting to database:", err);
-    } else {
-      console.log("Connected to database\n");
-    }
-  });
-  console.log(`\nrun server http://localhost:3000`);
+app.listen(3000, async () => {
+  console.log("\n");
+  await db.connect();
+  console.log(`run server http://localhost:3000`);
 });

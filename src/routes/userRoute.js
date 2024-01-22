@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var userController = require("../controllers/UserController");
 
+router.post("/update/delete", userController.delete);
 router.post("/update", userController.update);
 router.post("/", userController.create);
 router.get("/profile/email/image_user", userController.image_user);
