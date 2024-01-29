@@ -1,8 +1,13 @@
 const News = require("../models/News");
+const convertData = require("../utils/covertData");
 
 class NewsController {
   index(req, res, next) {
-    res.send("news");
+    News.find().then((data) => {
+      return res.render("new", {
+        data: convertData(data),
+      });
+    });
   }
 
   create(req, res, next) {
@@ -19,7 +24,8 @@ class NewsController {
         isDelete: false,
       });
       news.save();
-      return res.send("Created successfully");
+      // return res.send("Created successfully");
+      return res.redirect("/news");
     } catch (err) {
       return res.send("Errorrrrrrr");
     }
@@ -40,7 +46,8 @@ class NewsController {
       }
     )
       .then(() => {
-        res.send("bạn đã thay đổi thành công");
+        res.send({ thongbao: "bạn đã thay đổi thành công" });
+        // return res.redirect("/news");
       })
       .catch((err) => {
         return res.send("Error");
@@ -73,6 +80,17 @@ class NewsController {
       })
       .catch((err) => {
         return res.send("Error");
+      });
+  }
+  delete(req, res, next) {
+    const deleteId = req.params.deleteId;
+    News.deleteOne({ _id: deleteId })
+
+      .then(() => {
+        return res.send("done");
+      })
+      .catch((err) => {
+        return res.send("error");
       });
   }
 }

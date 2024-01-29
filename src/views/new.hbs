@@ -1,0 +1,41 @@
+<style>
+  form{ margin: 50px 0;display: flex; flex-direction: column; } input{ padding:
+  10px; border: 1px solid black } button{ padding: 10px; color: white;
+  background-color: black; }
+</style>
+
+{{#data}}
+  <ul>
+    <li>title: {{title}}</li>
+    <li>content:{{content}}</li>
+    <li>isDeleted: <b>{{isDelete}}</b></li>
+    <li><button onclick="deleteNew('{{_id}}')">Xoa vinh vien</button></li>
+    <li><button onclick="deleteMem('{{_id}}')">Xoa tam thoi</button></li>
+    {{!-- <li>image <img src="{{image}}" /></li> --}}
+  </ul>
+
+{{/data}}
+
+<form method="post" action="/news/create">
+  <h1>Form tao event</h1>
+  <label for="">tieude</label>
+  <input type="text" name="title" />
+  <label for="">content</label>
+  <input type="text" name="content" />
+  <label for="">hinh</label>
+  <input type="text" name="image" />
+  <button>gui</button>
+</form>
+
+<form>
+  <h1>Form tao event</h1>
+  <label for="id">id</label>
+  <input type="text" name="id" id="id" />
+  <label for="">tieude</label>
+  <input type="text" name="title" id="title" />
+  <label for="">content</label>
+  <input type="text" name="content" id="content" />
+  <label for="">hinh</label>
+  <input type="text" name="image" id="image" />
+  <button type="button" onclick="submitForm()">gui</button>
+</form>

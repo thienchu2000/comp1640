@@ -1,13 +1,16 @@
 const Events = require("../models/Events");
+const convertData = require("../utils/covertData");
 
 class EventsController {
   index(req, res, next) {
     Events.find({})
       .then((data) => {
-        res.send(data);
+        return res.render("event", {
+          respone: convertData(data),
+        });
       })
       .catch((err) => {
-        res.send("Loi tim kiem");
+        return res.render("not-found");
       });
   }
   create(req, res, next) {
@@ -26,14 +29,16 @@ class EventsController {
         time,
       });
       events.save();
-      return res.send("them thanh cong ");
+      return res.redirect("/events");
     } catch (err) {
       throw res.send(err);
     }
   }
   update(req, res, next) {
+    console.log("da vao");
     const eventId = req.params.id;
     const { title, content, image, address, time } = req.body;
+    console.log(req.body, eventId);
 
     Events.findOneAndUpdate(
       { _id: eventId },
@@ -46,7 +51,7 @@ class EventsController {
       }
     )
       .then(() => {
-        return res.send("Update successful");
+        return res.send("thanh cog");
       })
       .catch((err) => {
         console.error(err);
