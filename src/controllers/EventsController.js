@@ -15,6 +15,7 @@ class EventsController {
   }
   create(req, res, next) {
     const { title, content, image, address, time } = req.body;
+    console.log(req.body);
     if (!title || !content || !image || !address || !time) {
       return res.send("dien du thong tin");
     }
@@ -71,8 +72,10 @@ class EventsController {
   }
   isDelete(req, res, next) {
     const isDeleteId = req.params.isDeleteId;
-    Events.updateOne({ _id: isDeleteId }, { isDelete: true })
-      .then(() => {
+    Events.findOne({ _id: isDeleteId })
+      .then(async (item) => {
+        var check = item.isDelete;
+        await Events.updateOne({ _id: isDeleteId }, { isDelete: !check });
         return res.send("done");
       })
       .catch((err) => {

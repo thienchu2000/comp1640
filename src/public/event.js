@@ -1,14 +1,19 @@
-function deleteEvent(id) {
-  console.log(id);
-  axios
-    .delete(`/events/delete/${id}`, {})
-    .then((result) => {
-      window.location.reload();
-    })
-    .catch((error) => {
-      alert("that bai");
-    });
+function deleteEvent(id, isDeleteEvent) {
+  console.log(typeof isDeleteEvent);
+  if (isDeleteEvent) {
+    axios
+      .delete(`/events/delete/${id}`, {})
+      .then((result) => {
+        window.location.reload();
+      })
+      .catch((error) => {
+        alert("that bai");
+      });
+  } else {
+    return alert("you don't have permission to delete");
+  }
 }
+
 function updateEvent(id) {
   var title = document.getElementById("title").value;
   var content = document.getElementById("content").value;
@@ -32,3 +37,19 @@ function updateEvent(id) {
       alert("that bai");
     });
 }
+
+function isDeleteEvent(id) {
+  axios
+    .put(`/events//isDelete/${id}`)
+    .then((result) => {
+      window.location.reload();
+    })
+    .catch((error) => {
+      alert("that bai");
+    });
+}
+
+function sum(a, b) {
+  return a + b;
+}
+console.log(sum(1, 2));
