@@ -5,6 +5,7 @@ const route = require("./routes");
 const db = require("./config/db");
 const { create } = require("express-handlebars");
 const path = require("path");
+const bcrypt = require("bcrypt");
 
 const exphbs = create({
   extname: ".hbs",
