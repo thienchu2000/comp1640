@@ -2,7 +2,7 @@ const db = require("../config/db");
 
 class HomeController {
   index(req, res, next) {
-    return res.render("index", {});
+    return res.render("index", { user: res.user });
   }
   async search(req, res, next) {
     const inputValue = req.query.inputValue;

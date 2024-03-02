@@ -8,7 +8,7 @@ class RegisterController {
   }
 
   async register(req, res, next) {
-    const { name, email, password } = req.body;
+    const { name, email, password, role } = req.body;
     try {
       if (!name || !password || !email) {
         return res.send("dien day du du lieu");
@@ -29,6 +29,7 @@ class RegisterController {
         name,
         email,
         password: hash,
+        role,
       });
       user.save();
       res.render("login", { name });

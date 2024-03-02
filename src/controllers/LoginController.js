@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 class LoginController {
   index(req, res, next) {
@@ -18,7 +19,13 @@ class LoginController {
     }
 
     const user = await User.findOne({ name });
+
     bcrypt.compare(password, user.password, function (err, result) {
+      var token = jwt.sign(
+        { name: user.name, email: user.email, role: user.role },
+        "shhhh"
+      );
+      res.cookie("access_token", token);
       res.redirect("/");
     });
   }

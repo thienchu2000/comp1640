@@ -6,6 +6,7 @@ const db = require("./config/db");
 const { create } = require("express-handlebars");
 const path = require("path");
 const bcrypt = require("bcrypt");
+const cookieParser = require("cookie-parser");
 
 const exphbs = create({
   extname: ".hbs",
@@ -17,6 +18,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname + "/public"));
+app.use(cookieParser());
 
 app.engine("hbs", exphbs.engine);
 app.set("view engine", "hbs");
